@@ -1,4 +1,13 @@
 module.exports = {
-  WIT_TOKEN: process.env.WIT_TOKEN || '7DBSLYZEHB2ZXLZE63MBZYYZU5VQKM2F',
-  TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN || '1012381439:AAHiLlWfgCNRpngZVHD3jCpj4KYWK4TNAPk'
+  wit: {
+    token: process.env.WIT_TOKEN || '7DBSLYZEHB2ZXLZE63MBZYYZU5VQKM2F',
+  },
+  telegram: {
+    token: process.env.TELEGRAM_BOT_TOKEN || '1012381439:AAHiLlWfgCNRpngZVHD3jCpj4KYWK4TNAPk',
+    verbose: false,
+  },
+  elasticsearch: {
+    host: 'http://localhost:9200',
+    index: 'product'
+  }
 };

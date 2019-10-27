@@ -51,7 +51,13 @@ module.exports = {
   /**
    * Send tokens to user in Telegram Open Network
    */
-  sendGrams: async (private_key_files, addr_key_files, address, amount, transfer_comment = '') => {
+  sendGrams: async (
+    private_key_files,
+    addr_key_files,
+    address,
+    amount,
+    transfer_comment = ''
+  ) => {
     let addr = false;
     if (private_key_files.length === 0) {
       new Error('Private key file is required');

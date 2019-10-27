@@ -19,10 +19,66 @@
   "homepage": "https://github.com/dreamteam-tech/hack_1019#readme",
   "dependencies": {
     "@elastic/elasticsearch": "^7.4.0",
-    "node-wit": "^5.0.0"
+    "node-wit": "^5.0.0",
+    "telegraf-command-parts": "^1.0.3",
+    "telegraf-inline-menu": "^3.6.3"
   },
   "devDependencies": {
+    "eslint": "^5.16.0",
     "nodemon": "^1.19.4",
     "telegraf": "^3.33.0"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 2017,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": false
+      }
+    },
+    "env": {
+      "browser": false,
+      "node": true
+    },
+    "rules": {
+      "indent": [
+        "error",
+        2
+      ],
+      "strict": 0,
+      "semi": 1,
+      "quotes": [
+        1,
+        "single"
+      ],
+      "object-curly-spacing": [
+        1,
+        "always"
+      ],
+      "no-undef": [
+        "error",
+        {
+          "typeof": true
+        }
+      ],
+      "no-global-assign": [
+        "error"
+      ],
+      "no-restricted-globals": [
+        "error",
+        {
+          "name": "event",
+          "message": "Use local parameter instead."
+        },
+        {
+          "name": "confirm",
+          "message": "Use window.confirm instead."
+        },
+        {
+          "name": "alert",
+          "message": "Use window.alert instead."
+        }
+      ]
+    }
   }
 }
