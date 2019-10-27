@@ -1,6 +1,6 @@
 const fs = require('fs');
 const nacl = require('./nacl.min');
-const ton = require('./tonCellobfuscated');
+const ton = require('./ton');
 
 const base64abc = (() => {
   let abc = [],
