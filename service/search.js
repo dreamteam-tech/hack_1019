@@ -1,6 +1,8 @@
-const {Client} = require('@elastic/elasticsearch');
+const { Client } = require('@elastic/elasticsearch');
+const { elasticsearch } = require('../config');
+
 const client = new Client({
-  node: 'http://localhost:9200',
+  node: elasticsearch.host,
   log: 'trace'
 });
 
@@ -33,29 +35,35 @@ client.ping((error) => {
   console.log('All is well');
 });
 
-const ELASTIC_INDEX = 'product';
-
 module.exports = {
   add: async term => {
     await client.index({
-      index: ELASTIC_INDEX,
+      index: elasticsearch.index,
       body: {
         name: term
       }
     });
 
     await client.indices.refresh({
-      index: ELASTIC_INDEX
+      index: elasticsearch.index
     });
   },
 
-  search: async term => {
+  search: async (
+    productType,
+    properties
+  ) => {
     // Let's search!
-    const {body} = await client.search({
-      index: ELASTIC_INDEX,
+    const {
+      body
+    } = await client.search({
+      index: elasticsearch.index,
       body: {
         query: {
-          match: { name: term }
+          match: {
+            productType,
+            properties
+          }
         }
       }
     });
