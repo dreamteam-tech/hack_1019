@@ -4,7 +4,8 @@ const Scene = require('telegraf/scenes/base');
 const service = require('../service');
 
 const buyKeyboard = Markup.inlineKeyboard([
-  Markup.callbackButton('Buy', 'buy')
+  Markup.callbackButton('Buy', 'buy'),
+  Markup.callbackButton('Details', 'details')
 ]);
 
 const searchScene = new Scene('search');
@@ -15,8 +16,6 @@ searchScene.enter(async ctx => {
     productType,
     properties
   } = ctx.scene.state;
-
-  ctx.reply(`Search with parameters: ${service.utils.prettyJson(properties)}`);
 
   try {
     const body = await service.search.search(productType, properties);
@@ -29,14 +28,12 @@ searchScene.enter(async ctx => {
         const product = products[i];
         const lines = [];
 
-        if (product.isShop) {
-          lines.push(`Shop: ${product.sellerName}`);
-        } else {
-          lines.push(product.sellerName);
-        }
+        lines.push(product.image);
+        lines.push(`Seller: ${product.sellerName}`);
         lines.push(`Review: ${product.review}/5`);
-        lines.push(`Price: ${product.price}$`);
+        lines.push(`Price: ${product.price} GRAM`);
 
+        // pipe url content
         ctx.reply(lines.join('\n'), Extra.markup(buyKeyboard));
       }
     }
@@ -46,31 +43,25 @@ searchScene.enter(async ctx => {
   }
 });
 
+searchScene.action('details', async ctx => {
+  ctx.reply('Sorry, uncomplete yet');
+});
+
 searchScene.action('buy', async ctx => {
-  /*
-  if (!ctx.session.user) {
-    ctx.reply('Please sign-in!');
-  } else {
-    const privateKeyFiles = []; // @todo
-    const addrKeyFiles = []; // @todo
-    const amount = 0; // @todo
-    const comment = ''; // @todo
-
-    const { address } = ctx.session.user;
-
-    const state = await service.ton.sendGrams(
-      privateKeyFiles,
-      addrKeyFiles,
-      address,
-      amount,
-      comment
+  try {
+    const tx = await service.ton.sendGrams(
+      ctx.session.user.privateKeyFiles,
+      ctx.session.user.addrKeyFiles,
+      ctx.session.user.address,
+      ctx.session.amount || 0,
+      ctx.session.comment || ''
     );
 
-    ctx.reply(state ? 'Success 👍' : 'Failed');
+    ctx.reply('👍');
+    ctx.reply(`Successful\nYour transaction ID: ${tx.hash}\nhttps://test.ton.org/testnet/transaction?account=${ctx.session.user.address}&lt=${tx.lt}&hash=${tx.hash}`);
+  } catch (e) {
+    ctx.reply(e.toString());
   }
-  */
-
-  ctx.reply('Experimental feature. Incomplete yet. In the future you can make payment with grams ;)');
 });
 
 module.exports = searchScene;

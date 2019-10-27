@@ -4,7 +4,7 @@ module.exports = {
   },
   telegram: {
     token: process.env.TELEGRAM_BOT_TOKEN || '1012381439:AAHiLlWfgCNRpngZVHD3jCpj4KYWK4TNAPk',
-    verbose: false,
+    verbose: true,
   },
   elasticsearch: {
     host: 'http://localhost:9200',

@@ -6,28 +6,6 @@ const client = new Client({
   log: 'trace'
 });
 
-/*
-curl --request PUT \
-  --url http://localhost:9200/product \
-  --header 'content-type: application/json' \
-  --data ' {
-"mappings": {
-  "product": {
-    "properties": {
-      "name": {
-        "type": "text",
-          "analyzer": "russian"
-      },
-      "description": {
-        "type": "text",
-          "analyzer": "russian"
-      }
-    }
-  }
-}
-}'
-*/
-
 client.ping((error) => {
   if (error) {
     console.trace('elasticsearch cluster is down!');

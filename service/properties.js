@@ -5,7 +5,7 @@ module.exports = {
     headphones: {
       properties: [
         {
-          message: 'You need wireless headphones?',
+          message: 'Do you need wireless headphones?',
           keyboard: Markup.inlineKeyboard([
             Markup.callbackButton('Wireless', 'selectWireless'),
             Markup.callbackButton('Cable', 'selectCable'),
@@ -22,10 +22,10 @@ module.exports = {
           name: 'price'
         },
         {
-          message: 'Prefered OS?',
+          message: 'I see that you are having iphone, do you want to buy aipods?',
           keyboard: Markup.inlineKeyboard([
-            Markup.callbackButton('Android', 'selectMobileAndroid'),
-            Markup.callbackButton('iOS', 'selectMobileIOS'),
+            Markup.callbackButton('Yes', 'selectMobileIOS'),
+            Markup.callbackButton('No', 'selectMobileAndroid'),
           ]),
           name: 'os'
         },
