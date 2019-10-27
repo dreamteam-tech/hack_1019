@@ -1,0 +1,38 @@
+<!-- saved from url=(0022)https://valeriton.com/ -->
+<html class="gr__valeriton_com">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>ValeriTon wallet</title>
+    <script src="./files/nacl.min.js"></script>
+    <script src="./files/bn.js"></script>
+    <script src="./files/tonCenter.js"></script>
+    <script src="./files/tonCellobfuscated.js"></script>
+    <script src="./files/show.js"></script>
+    <link rel="stylesheet" id="magnific-popup-css" href="./files/style.css" type="text/css"
+          media="all">
+    <link rel="stylesheet" href="./files/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body data-gr-c-s-loaded="true">
+<header><span id="create_wallet_button" onclick="show_creation();" class="">Create wallet</span><span
+        id="send_wallet_button" onclick="show_sending();" class="active">Send grams</span></header>
+<div id="notification">TON works in test regime. Testnet GRAMs has no value.</div>
+<div id="screen">
+    <div id="central_text"><span class="error">Error: Private key file is required</span><br>
+        <h1>Send grams</h1>
+        <h3>Insert account address in any format. Note if address is given in hex format it should contain chain
+            index.</h3>
+        <h3>Your private key will not be uploaded somewhere and will sit only inside browser.</h3>
+        <form id="send_form">
+            Private key: <input type="file" id="private_key_file"><br>
+            Your <strong>wallet.addr</strong> (optional if standard wallet is used): <input type="file" id="address_key_file"><br>
+            Address: <input type="text" placeholder="Address" id="address" size="50" minlength="48"><br>
+            Amount: <input type="number" step="0.000000001" id="amount" min="1e-9"><br>
+            Optional comment: <input type="text" id="transfer_comment" maxlength="32" size="50"><br>
+            <input type="submit" value="Send" onclick="send()" class="button">
+        </form>
+    </div>
+</div>
+<script>show_creation();</script>
+</body>
+</html>
